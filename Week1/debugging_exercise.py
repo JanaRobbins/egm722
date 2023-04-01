@@ -1,7 +1,7 @@
 import random
 
 # pick a random number for the user to guess
-rand = random.randint(1, 100)
+rand = random.randint(1, 20)
 
 print('Guess a number between 1 and 20.')
 guess = int(input())  # number needs to be an integer
