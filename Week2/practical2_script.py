@@ -99,6 +99,8 @@ ax.add_feature(river_feat)  # add the collection of features to the map
 
 # ShapelyFeature creates a polygon, so for point data we can just use ax.plot()
 town_handle = ax.plot(towns.geometry.x, towns.geometry.y, 's', color='0.5', ms=6, transform=myCRS)
+city_hadle = ax.plot(towns.geomery.x, towns.geometry.y, 's', color=r, ms=8, transform=myCRS)
+
 
 # generate a list of handles for the county datasets
 county_handles = generate_handles(counties.CountyName.unique(), county_colors, alpha=0.25)
@@ -113,7 +115,7 @@ river_handle = [mlines.Line2D([], [], color='royalblue')]  # have to make this a
 nice_names = [name.title() for name in county_names]
 
 # ax.legend() takes a list of handles and a list of labels corresponding to the objects you want to add to the legend
-handles = county_handles + water_handle + river_handle + town_handle + cities_handle
+handles = county_handles + water_handle + river_handle + town_handle + city_handle
 labels = nice_names + ['Lakes', 'Rivers', 'Towns', 'Cities']
 
 leg = ax.legend(handles, labels, title='Legend', title_fontsize=12,
