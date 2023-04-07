@@ -87,7 +87,7 @@ for ii, name in enumerate(county_names):
 water_feat = ShapelyFeature(water['geometry'],  # first argument is the geometry
                             myCRS,  # second argument is the CRS
                             edgecolor='mediumblue',  # set the edgecolor to be mediumblue
-                            facecolor='pink',  # set the facecolor to be mediumblue
+                            facecolor='mediumblue',  # set the facecolor to be mediumblue
                             linewidth=1)  # set the outline width to be 1 pt
 ax.add_feature(water_feat)  # add the collection of features to the map
 
@@ -113,8 +113,8 @@ river_handle = [mlines.Line2D([], [], color='royalblue')]  # have to make this a
 nice_names = [name.title() for name in county_names]
 
 # ax.legend() takes a list of handles and a list of labels corresponding to the objects you want to add to the legend
-handles = county_handles + water_handle + river_handle + town_handle
-labels = nice_names + ['Lakes', 'Rivers', 'Towns']
+handles = county_handles + water_handle + river_handle + town_handle + cities_handle
+labels = nice_names + ['Lakes', 'Rivers', 'Towns', 'Cities']
 
 leg = ax.legend(handles, labels, title='Legend', title_fontsize=12,
                 fontsize=10, loc='upper left', frameon=True, framealpha=1)
