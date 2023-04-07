@@ -99,7 +99,7 @@ ax.add_feature(river_feat)  # add the collection of features to the map
 
 # ShapelyFeature creates a polygon, so for point data we can just use ax.plot()
 town_handle = ax.plot(towns.geometry.x, towns.geometry.y, 's', color='0.5', ms=6, transform=myCRS)
-city_hadle = ax.plot(towns.geomery.x, towns.geometry.y, 's', color=r, ms=8, transform=myCRS)
+city_handle = ax.plot(towns.geomery.x, towns.geometry.y, 's', color=r, ms=8, transform=myCRS)
 
 
 # generate a list of handles for the county datasets
