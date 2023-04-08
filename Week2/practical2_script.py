@@ -87,7 +87,7 @@ for ii, name in enumerate(county_names):
 water_feat = ShapelyFeature(water['geometry'],  # first argument is the geometry
                             myCRS,  # second argument is the CRS
                             edgecolor='mediumblue',  # set the edgecolor to be mediumblue
-                            facecolor='b',  # set the facecolor to be mediumblue
+                            facecolor='aqua',  # set the facecolor to be mediumblue
                             linewidth=1)  # set the outline width to be 1 pt
 ax.add_feature(water_feat)  # add the collection of features to the map
 
