@@ -97,9 +97,10 @@ river_feat = ShapelyFeature(rivers['geometry'],  # first argument is the geometr
                             linewidth=0.2)  # set the linewidth to be 0.2 pt
 ax.add_feature(river_feat)  # add the collection of features to the map
 
-# ShapelyFeature creates a polygon, so for point data we can just use ax.plot()
+# ShapelyFeature creates a polygon, so for point data we can just use ax.plot() - Alison's ideas
 #town_handle = ax.plot(towns.geometry.x, towns.geometry.y, 's', color='0.5', ms=6, transform=myCRS)
 #city_handle = ax.plot(towns.geometry.x, towns.geometry.y, 'o', color='r', ms=8, transform=myCRS)
+#Bob's instruction from the discusion
 just_towns = towns.loc[towns['STATUS'] == 'Town']
 ax.plot(just_towns.geometry.x, towns.geometry.y, 's', color='g', ms=6, transform=myCRS)
 
