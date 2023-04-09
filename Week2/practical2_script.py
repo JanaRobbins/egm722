@@ -105,7 +105,7 @@ just_towns = towns.loc[towns['STATUS'] == 'Town']
 ax.plot(just_towns.geometry.x, towns.geometry.y, 's', color='g', ms=6, transform=myCRS)
 
 just_cities = cities.loc[cities['STATUS'] == 'City']
-ax.plot(just_cities.geometry.x, towns.geometry.y, 'v', color='m', ms=8, transform=myCRS)
+ax.plot(just_cities.geometry.x, towns.geometry.y, 'v', color='y', ms=8, transform=myCRS)
 
 # generate a list of handles for the county datasets
 county_handles = generate_handles(counties.CountyName.unique(), county_colors, alpha=0.25)
