@@ -87,7 +87,7 @@ for ii, name in enumerate(county_names):
 water_feat = ShapelyFeature(water['geometry'],  # first argument is the geometry
                             myCRS,  # second argument is the CRS
                             edgecolor='mediumblue',  # set the edgecolor to be mediumblue
-                            facecolor='gold',  # set the facecolor to be mediumblue
+                            facecolor='mediumblue',  # set the facecolor to be mediumblue
                             linewidth=1)  # set the outline width to be 1 pt
 ax.add_feature(water_feat)  # add the collection of features to the map
 
@@ -104,7 +104,7 @@ ax.add_feature(river_feat)  # add the collection of features to the map
 just_towns = towns.loc[towns['STATUS'] == 'Town']
 ax.plot(just_towns.geometry.x, towns.geometry.y, 's', color='g', ms=6, transform=myCRS)
 
-just_cities = cities.loc[cities['STATUS'] == 'City']
+just_cities = towns.loc[towns['STATUS'] == 'City']
 ax.plot(just_cities.geometry.x, towns.geometry.y, 'v', color='y', ms=8, transform=myCRS)
 
 # generate a list of handles for the county datasets
