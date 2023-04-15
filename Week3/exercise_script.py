@@ -11,11 +11,20 @@ import matplotlib.patches as mpatches
 # try to print the results to the screen using the format method demonstrated in the workbook
 
 # load the necessary data here and transform to a UTM projection
+wards = gpd.read_file('data_files/NI_Wards.shp')
+counties = gpd.read_file('data_files/Counties.shp')
+wards = wards.to_crs(epsg=32629)
+counties = counties.to_crs(epsg=32629)
 
 # your analysis goes here...
+join=gpd.sjoin(wards, counties, how='inner', lsuffix='left', rsuffix='right')
 
+#summarizing population by county
+join_total=join['Population']/join['Area_SqKM']
+print(join.groupby(['CountyName'])[join_total].sum())
 # ---------------------------------------------------------------------------------------------------------------------
-# below here, you may need to modify the script somewhat to create your map.
+# summary= clipped_gdf.groupy(['CountyName'])['Population'].sum()
+# print(summary)w here, you may need to modify the script somewhat to create your map.
 # create a crs using ccrs.UTM() that corresponds to our CRS
 myCRS = ccrs.UTM(29)
 # create a figure of size 10x10 (representing the page size in inches

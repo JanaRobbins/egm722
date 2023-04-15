@@ -62,28 +62,45 @@ with rio.open('data_files/NI_Mosaic.tif') as dataset:
 
 # your code goes here!
 # start by loading the outlines and point data to add to the map
-
+myCRS = ccrs.UTM(29)
 
 # next, create the figure and axis objects to add the map to
-
+fig, ax = plt.subplots(1,1, figsize=(10,10), subplot_kw=dict(projection=myCRS))
 
 # now, add the satellite image to the map
-
+ax.imshow(img[3], cmap='gray', vmin=200, vmax=5000)
 
 # next, add the county outlines to the map
-
+ax.imshow(img[3], cmap='gray', vmin=200, vmax=5000, transorm=myCRS, extent=[xmin, xmax, ymin, ymax])
 
 # then, add the town and city points to the map, but separately
+towns = gpd.read_file('data_files/towns.shp')
+is_town=towns['STATUS'] == 'Town'
+is_city=towns['STATUS'] == 'City'
 
+town_handle = ax.plot(towns[is_town].geometry.x,towns[is_town].geometry.y,'s',color='b',ms=6,transform=myCRS)
+city_handle = ax.plot(towns[is_city].geometry.x,towns[is_city].geometry.y,'s',color='s',ms=9,transform=myCRS)
 
 # finally, try to add a transparent overlay to the map
+
+
 # note: one way you could do this is to combine the individual county shapes into a single shape, then
 # use a geometric operation, such as a symmetric difference, to create a hole in a rectangle.
 # then, you can add the output of the symmetric difference operation to the map as a semi-transparent feature.
-
+overlay=ShapelyFeature(counties['geometry'],myCRS,edgecolor='r',facecolor='none')
 
 # last but not least, add gridlines to the map
+# add the county outlines
+county_outlines = ShapelyFeature(counties['geometry'], myCRS, edgecolor='r', facecolor='none')
 
+ax.add_feature(overlay)
+ax.add_feature(county_outlines)
+
+# create a handle to feed to the legend
+county_handles = generate_handles([''], ['none'], edge='r')
+
+ax.legend(county_handles + town_handle + city_handle,
+          ['County Boundaries', 'Town', 'City'], fontsize=13, loc='upper left', framealpha=1)
 
 # and of course, save the map!
-
+fig.savefig('imgs/example_map.png',dpi=300, bbox_inches='tight')
